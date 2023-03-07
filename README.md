@@ -9,6 +9,12 @@ If applicable, you can also show an example of the final output.
 
 ![](media/examples/emojis.png)
 
+<object data="media/Pipeline_Text_Simplification_Pivot.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="media/Pipeline_Text_Simplification_Pivot.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="media/Pipeline_Text_Simplification_Pivot.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
 ---
 
 
