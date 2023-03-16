@@ -1,3 +1,4 @@
+'''this script desubwords an input file'''
 
 import youtokentome as yttm
 import sys

@@ -1,3 +1,5 @@
+'''This script trains a bpe model on an input file'''
+
 import youtokentome as yttm
 import sys
 

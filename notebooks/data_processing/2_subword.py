@@ -1,3 +1,5 @@
+'''This script subwords an input file using bpe'''
+
 import youtokentome as yttm
 import sys
 
