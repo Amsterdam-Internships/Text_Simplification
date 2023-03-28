@@ -18,7 +18,7 @@ import sys
 #from IPython.display import display
 
 
-def prepare(source_file, target_file, source_lang, target_lang, lower=False):
+def prepare(source_file, target_file, source_lang, target_lang, lower=True):
     
     df_source = pd.read_csv(source_file, names=['Source'], sep="\n", quoting=csv.QUOTE_NONE, skip_blank_lines=False, on_bad_lines="skip")
     df_target = pd.read_csv(target_file, names=['Target'], sep="\n", quoting=csv.QUOTE_NONE, skip_blank_lines=False, on_bad_lines="skip")
