@@ -1,0 +1,61 @@
+## Where the samples will be written
+save_data: NMT-Data/Model_English_S_Dutch_S/run/
+
+## Where the vocab(s) will be written
+src_vocab: NMT-Data/Model_English_S_Dutch_S/run/vocab.src
+tgt_vocab: NMT-Data/Model_English_S_Dutch_S/run/vocab.tgt
+
+# Prevent overwriting existing files in the folder
+overwrite: False
+
+# Corpus opts:
+data:
+    corpus_1:
+        path_src: NMT-Data/Model_English_S_Dutch_S/opensubtitles_en-filtered.en-subword.en.train
+        path_tgt: NMT-Data/Model_English_S_Dutch_S/opensubtitles_nl-filtered.nl-subword.nl.train
+    valid:
+        path_src: NMT-Data/Model_English_S_Dutch_S/opensubtitles_en-filtered.en-subword.en.dev
+        path_tgt: NMT-Data/Model_English_S_Dutch_S/opensubtitles_nl-filtered.nl-subword.nl.dev
+
+Parameters:
+early_stopping: 5
+# General opts
+save_model: NMT-Data/Model_English_S_Dutch_S/model/mybasemodel
+save_checkpoint_steps: 10000
+valid_steps: 1000
+train_steps: 10000
+
+# Batching
+bucket_size: 262144
+batch_type: "tokens"
+batch_size: 1024
+valid_batch_size: 2048
+accum_count: [4]
+accum_steps: [0]
+
+# Optimization
+model_dtype: "fp16"
+optim: "adam"
+learning_rate: 2
+warmup_steps: 8000
+decay_method: "noam"
+adam_beta2: 0.998
+max_grad_norm: 0
+label_smoothing: 0.1
+param_init: 0
+param_init_glorot: true
+normalization: "tokens"
+
+# Model
+encoder_type: transformer
+decoder_type: transformer
+position_encoding: true
+enc_layers: 6
+dec_layers: 6
+heads: 8
+hidden_size: 512
+word_vec_size: 512
+transformer_ff: 2048
+dropout_steps: [0]
+dropout: [0.1]
+attention_dropout: [0.1]
