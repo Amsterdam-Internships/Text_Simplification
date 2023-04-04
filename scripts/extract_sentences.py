@@ -1,91 +1,69 @@
-#This python script is used to retrieve a subset of sentences from the opensubtitles corpus.
-#The subset is retrieved on the basis of cosine similarity to a reference corpus (in our case the evaluation test set provided by marloes)
+'''
+This script takes extracts sentences from the opensubtitles corpus.
+The sentences are chosen based on their similarity to a number of reference sentences.
+'''
+
+from sklearn.neighbors import NearestNeighbors
+from sklearn.feature_extraction.text import TfidfVectorizer
 from datasets import load_dataset
-import numpy as np
-from sentence_transformers import SentenceTransformer, util
-import time
+from tqdm import tqdm
 
-start = time.time()
-
-nl_file_path = "NMT-Data/Model_English_S_Dutch_S/opensubtitles_nl"
-en_file_path = "NMT-Data/Model_English_S_Dutch_S/opensubtitles_en"
-
-max_sentences = 500000 #number of aligned sentences in final output
 extracted_sentences={}
 counter = 0
-lowest_cosine_similarity = float(2)  # initialize with a very large value
 
+nl_file_path = "NMT-Data/Model_English_S_Dutch_S/opensubtitles_nl_testing"
+en_file_path = "NMT-Data/Model_English_S_Dutch_S/opensubtitles_en_testing"
 
-#function to save the n most similar sentences to a dictionary
-def compute_cosine_sim(sentence):
-    global counter
-    global lowest_cosine_similarity
-
-    # encode sentence
-    embedding = model.encode(sentence['translation']['nl'], convert_to_tensor=True)
-    
-    # Compute the cosine similarity between the Dutch sentence embedding and a list of reference embeddings
-    cosine_scores = util.cos_sim(embedding, ref_embeddings)    
-    
-    #if dict not yet max length
-    if counter <= max_sentences:
-
-        # add sentences to dict
-        extracted_sentences["sentence{}".format(counter)] = {}
-        extracted_sentences["sentence{}".format(counter)]['sentence nl'] = sentence['translation']['nl']
-        extracted_sentences["sentence{}".format(counter)]['sentence en'] = sentence['translation']['en']
-        extracted_sentences["sentence{}".format(counter)]['cosine similarity'] = cosine_scores.max()
-
-        #print('Added Sentence')
-        counter +=1
-
-    #if dict max length
-    else:
-
-        lowest_cosine_similarity_id = min(extracted_sentences, key=lambda id: extracted_sentences[id]['cosine similarity'].item())
-        lowest_cosine_similarity=min(extracted_sentences.values(), key = lambda x: x['cosine similarity'].item())
-        lowest_cosine_similarity_score = lowest_cosine_similarity['cosine similarity']
-        print(lowest_cosine_similarity_score)
-
-        if cosine_scores.max() > lowest_cosine_similarity_score:
-
-            
-            #update dict items
-            extracted_sentences[lowest_cosine_similarity_id]['sentence nl'] = sentence['translation']['nl']
-            extracted_sentences[lowest_cosine_similarity_id]['sentence en'] = sentence['translation']['en']
-            extracted_sentences[lowest_cosine_similarity_id]['cosine similarity'] = cosine_scores.max()
-
-
-            #print('Replaced Sentence')
-            
-
-
-        else:
-            return
-            #print("Discarded Sentence")
-
-#load embedding model
-model = SentenceTransformer('sentence-transformers/paraphrase-distilroberta-base-v1')
-
-#Load the reference dataset.
 with open("/Users/danielvlantis/Text_Simplification/eval_data/NL_test_org", "r") as f:
     reference = f.readlines()
 
-ref_embeddings = model.encode(reference, convert_to_tensor=True)
+vectorizer = TfidfVectorizer()
 
-#load opensubtitles dataset
+vectorizer.fit(reference)
+
+reference_vectors = vectorizer.transform(reference)
+
+nn = NearestNeighbors(metric='cosine')
+
 dataset = load_dataset("open_subtitles", split='train', lang1="en", lang2="nl", streaming=True)
+def add_to_dict(example):
+    global counter
+    extracted_sentences["sentence{}".format(counter)] = {}
+    extracted_sentences["sentence{}".format(counter)]['sentence nl'] = example['translation']['nl']
+    extracted_sentences["sentence{}".format(counter)]['sentence en'] = example['translation']['en']
+    counter += 1
+
+print('extracting opensubtitles entries...')
 small_dataset = dataset.take(20000000)
+for example in tqdm(small_dataset):
+    add_to_dict(example)
 
-print('Working...')
-for example in small_dataset:
-    compute_cosine_sim(example)
+comparison_sentences = []
+print('extracting dutch sentences for comparison...')
+for key, value in tqdm(extracted_sentences.items()):
+    comparison_sentences.append(value['sentence nl'])
 
-end = time.time()
-print("total time taken in seconds: {}".format(end - start))
+print('fitting extracted sentences to vector space...')
+comparison_vectors = vectorizer.transform(comparison_sentences)
+nn.fit(comparison_vectors)
 
-#create nl sentences file and en sentences file
+n = 10000
+distances, indices = nn.kneighbors(reference_vectors, n_neighbors=n)
+final_output = {}
+
+print(f'finding {n} most similar sentences to each reference...')
+for i, sentence in tqdm(enumerate(reference)):
+    final_output[sentence.strip()] = []
+    for j in indices[i]:
+        final_output[sentence.strip()].append((comparison_sentences[j], extracted_sentences[f'sentence{j}']['sentence en']))
+
+print('writing sentences to files...')
 with open(nl_file_path, 'w', encoding='utf-8') as f1, open(en_file_path, 'w', encoding='utf-8') as f2:
-    for key in extracted_sentences:
-        f1.write(extracted_sentences[key]['sentence nl'] + '\n')
-        f2.write(extracted_sentences[key]['sentence en'] + '\n')
+    for key, value in tqdm(final_output.items()):
+        for pair in value:
+            nl_sent, en_sent = pair
+            f1.write(nl_sent + '\n')
+            f2.write(en_sent + '\n')
+
+print(f'Done! extracted dutch sentences written to {nl_file_path}')
+print(f'Done! extracted english sentences written to {en_file_path}')
