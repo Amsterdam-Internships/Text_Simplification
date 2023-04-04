@@ -12,7 +12,7 @@ unzip NMT-Data/Model_Dutch_C_English_C/emea_en-nl.txt.zip -d NMT-Data/Model_Dutc
 wget -c https://cs.pomona.edu/~dkauchak/simplification/data.v1/data.v1.tar.gz -O NMT-Data/Model_English_C_English_S/WikiSimple.tar.gz #WikiSimple Download
 tar -xvf NMT-Data/Model_English_C_English_S/WikiSimple.tar.gz -C NMT-Data/Model_English_C_English_S #WikiSimple unzip
 
-python3 scripts/extract_sentences.py  #OpenSubtiltes Download (change params in file to adjust number of aligned sentences and sample size)
+python scripts/extract_sentences.py --reference_data NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_org  #OpenSubtiltes Download (change params in file to adjust number of aligned sentences and sample size)
 
 #Preprocess data
 python3 notebooks/data_processing/filter.py NMT-Data/Model_Dutch_C_English_C/EMEA.en-nl.nl NMT-Data/Model_Dutch_C_English_C/EMEA.en-nl.en nl en #filter EMEA
@@ -67,8 +67,8 @@ onmt_build_vocab -config model_3.yaml -overwrite True #build vocab
 '''
 #Train Models
 onmt_train -config model_1.yaml -src_vocab NMT-Data/Model_Dutch_C_English_C/run/.vocab.src -tgt_vocab NMT-Data/Model_Dutch_C_English_C/run/.vocab.tgt #Train Emea model
-#onmt_train -config model_2.yaml -src_vocab NMT-Data/Model_English_C_English_S/run/.vocab.src -tgt_vocab NMT-Data/Model_English_C_English_S/run/.vocab.tgt #Train WikiSimple model
-#omnt_train -config model_3.yaml -src_vocab NMT-Data/Model_English_S_Dutch_S/run/.vocab.src -tgt_vocab NMT-Data/Model_English_S_Dutch_S/run/.vocab.tgt #train OpenSubtitles Model
+onmt_train -config model_2.yaml -src_vocab NMT-Data/Model_English_C_English_S/run/.vocab.src -tgt_vocab NMT-Data/Model_English_C_English_S/run/.vocab.tgt #Train WikiSimple model
+omnt_train -config model_3.yaml -src_vocab NMT-Data/Model_English_S_Dutch_S/run/.vocab.src -tgt_vocab NMT-Data/Model_English_S_Dutch_S/run/.vocab.tgt #train OpenSubtitles Model
 
 #Run input data through pipeline
 #model 1
