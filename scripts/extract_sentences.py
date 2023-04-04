@@ -14,7 +14,7 @@ counter = 0
 nl_file_path = "NMT-Data/Model_English_S_Dutch_S/opensubtitles_nl_testing"
 en_file_path = "NMT-Data/Model_English_S_Dutch_S/opensubtitles_en_testing"
 
-with open("/Users/danielvlantis/Text_Simplification/eval_data/NL_test_org", "r") as f:
+with open("NMT-Data/eval_Medical_Dutch_C_Dutch_S/NL_test_org", "r") as f:
     reference = f.readlines()
 
 vectorizer = TfidfVectorizer()
@@ -47,7 +47,7 @@ print('fitting extracted sentences to vector space...')
 comparison_vectors = vectorizer.transform(comparison_sentences)
 nn.fit(comparison_vectors)
 
-n = 10000
+n = 1000000//len(reference)
 distances, indices = nn.kneighbors(reference_vectors, n_neighbors=n)
 final_output = {}
 
