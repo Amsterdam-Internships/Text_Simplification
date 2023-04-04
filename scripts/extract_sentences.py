@@ -14,7 +14,7 @@ counter = 0
 nl_file_path = "NMT-Data/Model_English_S_Dutch_S/opensubtitles_nl_testing"
 en_file_path = "NMT-Data/Model_English_S_Dutch_S/opensubtitles_en_testing"
 
-with open("NMT-Data/eval_Medical_Dutch_C_Dutch_S/NL_test_org", "r") as f:
+with open("NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_org", "r") as f:
     reference = f.readlines()
 
 vectorizer = TfidfVectorizer()
