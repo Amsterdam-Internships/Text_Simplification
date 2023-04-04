@@ -10,14 +10,15 @@ from sklearn.neighbors import NearestNeighbors
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 parser = argparse.ArgumentParser()
+parser.add_argument('--reference_file', 
+                    help='path to reference file',
+                    required=True)
 parser.add_argument('--output_path_nl', 
                     help='path to store sampled dutch sentences', 
                     default="NMT-Data/Model_English_S_Dutch_S/opensubtitles_nl_testing")
 parser.add_argument('--output_path_en', 
                     help='path to store sampled english sentences', 
                     default="NMT-Data/Model_English_S_Dutch_S/opensubtitles_en_testing")
-parser.add_argument('--reference_file', 
-                    help='path to reference file',)
 parser.add_argument('--num_samples',
                     type=int,
                     help="number of sentences to extract",
