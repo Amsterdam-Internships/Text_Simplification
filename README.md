@@ -1,20 +1,17 @@
 # Automatic Text Simplification for Low Resource Languages using a Pivot Approach
-
-
 #TODO! 
 
-Explain in short what this repository is. Mind the target audience.
-No need to go into too much technical details if you expect some people would just use it as end-users 
-and don't care about the internals (so focus on what the code really *does*), not how.
-The *_How it works_* section below would contain more technical details for curious people.
+This repository contains the code to run a pivot-based text simplification for the dutch medical domain. It trains 3 models:
+-1st model: Translates complex dutch sentences to complex english sentences 
+-2nd Model: Simplifies complex english sentences to simple english sentences
+-3rd Model: Translates simple english sentences to simple dutch sentences
 
-If applicable, you can also show an example of the final output.
+On top of training the models the repo performs the simplification and evaluates its quality using a number of automatic evaluation metrics (BLEU,SARI,METEOR)
 
 ![](media/Pipeline_Text_Simplification_Pivot.pdf)
 
 
 ## Project Folder Structure
-
 
 Explain briefly what's where so people can find their way around. For example:
 
@@ -23,11 +20,12 @@ There are the following folders in the structure:
 
 1) [`src`](./src): Folder for all source files specific to this project
 1) [`scripts`](./scripts): Folder with example scripts for performing different tasks (could serve as usage documentation)
-1) ['notebooks'] (./notebooks): folder containing notebooks for running the pipeline
+1) ['notebooks'] (./notebooks): folder containing notebooks for running the pipeline as well as data-processing scripts for filtering, subwording, desubwording and splitting data
 1) [`media`](./media): Folder containing media files (icons, video)
+1) ['NMT-Data'](./NMT-Data): Folder where all data and models will be saved
+1) [`config`](./config): Folder containing configuration files for the training of the models
 
 ## Installation
-
 
 Explain how to set up everything. 
 Let people know if there are weird dependencies - if so feel free to add links to guides and tutorials.
@@ -47,44 +45,26 @@ A person should be able to clone this repo, follow your instructions blindly, an
 
 
 ## Usage
+To Run the pipeline the script expects evaluation data to be uploaded:
+original sentences: NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_org
+simplified sentences: NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_simp
 
+The pipeline script also expects some reference sentences in order to extract useful sentences from the opensubtitles domain, by default these sentences are taken from the original sentences in the evaluation data. If you wish to change this you can do so in the run_pipeline.sh file by changing reference_file argument in the following line:
 
-#TODO!
+    python scripts/extract_sentences.py --reference_file NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_org
 
-"download data from ... place it in ... etc"
+Once this is done you can run scripts/run_pipeline.sh (bear in mind that training the models requires a machine with a gpu)
 
-Explain example usage, possible arguments, etc. E.g.:
-
-To train... 
-
+The pipeline script downloads data, processes it, trains the relevant models, performs the simplification and evaluates the simplification.
 
 ```
-$ python train.py --some-importang-argument
+$ /scripts/run_pipeline.sh
 ```
-
-If there are too many command line arguments, you can add a nice table with explanation (thanks, [Diana Epureano](https://www.linkedin.com/in/diana-epureanu-235104153/)!)
-
-|Argument | Type or Action | Description | Default |
-|---|:---:|:---:|:---:|
-|`--batch_size`| int| `Batch size.`|  32|
-|`--device`| str| `Training device, cpu or cuda:0.`| `cpu`|
-|`--early-stopping`|  `store_true`| `Early stopping for training of sparse transformer.`| True|
-|`--epochs`| int| `Number of epochs.`| 21|
-|`--input_size`|  int| `Input size for model, i.e. the concatenation length of te, se and target.`| 99|
-|`--loss`|  str|  `Type of loss to be used during training. Options: RMSE, MAE.`|`RMSE`|
-|`--lr`|  float| `Learning rate.`| 1e-3|
-|`--train_ratio`|  float| `Percentage of the training set.`| 0.7|
-|...|...|...|...|
-
-
-Alternatively, as a way of documenting the intended usage, you could add a `scripts` folder with a number of scripts for setting up the environment, performing training in different modes or different tasks, evaluation, etc (thanks, [Tom Lotze](https://www.linkedin.com/in/tom-lotze/)!)
-
 ---
 
 ## How it works
 
 #TODO!
-
 ---
 ## Acknowledgements
 Our code uses preproccesing scripts from [MT-Preparation](https://github.com/ymoslem/MT-Preparation)
