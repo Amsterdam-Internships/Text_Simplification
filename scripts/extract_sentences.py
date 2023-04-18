@@ -1,5 +1,5 @@
 '''
-This script takes extracts sentences from the opensubtitles corpus.
+This script extracts sentences from the opensubtitles corpus.
 The sentences are chosen based on their similarity to a number of reference sentences.
 '''
 import argparse
