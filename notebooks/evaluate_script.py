@@ -1,18 +1,29 @@
-# This script is used to calculate automatic evaluation metrics for translated sentences.
-# Run the script and provide the following arguments: evaluate_script.py source_path reference_path predictions_path
-
+'''
+This script is used to calculate automatic evaluation metrics for translated sentences.
+parameters: --source_path --reference_path --target_path
+'''
 
 #Compute Bleu Sari and Meteor Scores for Validation set
+import argparse
 import sys
 import evaluate
 import os
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--source_path', 
+                    help='path to source sentences file',
+                    required=True)
+parser.add_argument('--target_path', 
+                    help='path to predicted sentences file', 
+                    required=True)
+parser.add_argument('--reference_path',
+                    help='path to reference sentences file',
+                    required=True)
+args=parser.parse_args()
 
-source_path = sys.argv[1]
-reference_path = sys.argv[2]
-predictions_path = sys.argv[3]
-
-print(source_path, reference_path, predictions_path)
+source_path = args.source_path
+reference_path = args.reference_path
+predictions_path = args.target_path
 
 #load source sentences
 sources = []
