@@ -1,11 +1,24 @@
 '''This script subwords an input file using bpe'''
 
+import argparse
 import youtokentome as yttm
 import sys
 
-model_path = sys.argv[1]
-input_path = sys.argv[2]
-output_path = sys.argv[3]
+parser = argparse.ArgumentParser()
+parser.add_argument('--input_path', 
+                    help='path to data file that needs to be subworded',
+                    required=True)
+parser.add_argument('--model_path', 
+                    help='path to subwording model', 
+                    required=True)
+parser.add_argument('--output_path',
+                    help='path to store subworded output file',
+                    required=True)
+args=parser.parse_args()
+
+model_path = args.model_path
+input_path = args.input_path
+output_path = args.output_path
 
 # Load the BPE model
 bpe = yttm.BPE(model_path)
