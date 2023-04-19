@@ -8,6 +8,7 @@ import argparse
 import sys
 import evaluate
 import os
+import matplotlib.pyplot as plt
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--source_path', 
@@ -19,11 +20,15 @@ parser.add_argument('--target_path',
 parser.add_argument('--reference_path',
                     help='path to reference sentences file',
                     required=True)
+parser.add_argument('--chart_title',
+                    help='Title of the results chart',
+                    required=True)
 args=parser.parse_args()
 
 source_path = args.source_path
 reference_path = args.reference_path
 predictions_path = args.target_path
+title = args.chart_title
 
 #load source sentences
 sources = []
@@ -63,3 +68,12 @@ print(sari_score)
 print(bleu_score)
 print(meteor_score)
 print('=' * term_size.columns)
+
+labels = ['SARI', 'BLEU', 'METEOR']
+scores = [sari_score['sari'], bleu_score['bleu']*100, meteor_score['meteor']*100]
+plt.bar(labels, scores)
+plt.title(title)
+plt.xlabel('Metric')
+plt.ylabel('Score')
+plt.ylim([0, 100])
+plt.savefig('media/{}.png'.format(title))
