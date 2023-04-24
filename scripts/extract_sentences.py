@@ -10,14 +10,14 @@ from sklearn.neighbors import NearestNeighbors
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--reference_file', 
+parser.add_argument('--reference_file',
                     help='path to reference file',
                     required=True)
-parser.add_argument('--output_path_nl', 
-                    help='path to store sampled dutch sentences', 
+parser.add_argument('--output_path_nl',
+                    help='path to store sampled dutch sentences',
                     default="NMT-Data/Model_English_S_Dutch_S/opensubtitles_nl_testing")
-parser.add_argument('--output_path_en', 
-                    help='path to store sampled english sentences', 
+parser.add_argument('--output_path_en',
+                    help='path to store sampled english sentences',
                     default="NMT-Data/Model_English_S_Dutch_S/opensubtitles_en_testing")
 parser.add_argument('--num_samples',
                     type=int,
@@ -43,11 +43,16 @@ reference_vectors = vectorizer.transform(reference)
 nn = NearestNeighbors(metric='cosine')
 
 dataset = load_dataset("open_subtitles", split='train', lang1="en", lang2="nl", streaming=True)
-def add_to_dict(example):
+def add_to_dict(sent):
+    '''
+    Extract english and dutch sentence pairs and store them in our dictionary
+    Args:
+        sent {iterable dataset item}
+    '''
     global counter
     extracted_sentences["sentence{}".format(counter)] = {}
-    extracted_sentences["sentence{}".format(counter)]['sentence nl'] = example['translation']['nl']
-    extracted_sentences["sentence{}".format(counter)]['sentence en'] = example['translation']['en']
+    extracted_sentences["sentence{}".format(counter)]['sentence nl'] = sent['translation']['nl']
+    extracted_sentences["sentence{}".format(counter)]['sentence en'] = sent['translation']['en']
     counter += 1
 
 print('extracting opensubtitles entries...')

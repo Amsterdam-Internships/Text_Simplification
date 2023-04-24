@@ -5,17 +5,16 @@ parameters: --source_path --reference_path --target_path
 
 #Compute Bleu Sari and Meteor Scores for Validation set
 import argparse
-import sys
-import evaluate
 import os
+import evaluate
 import matplotlib.pyplot as plt
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--source_path', 
+parser.add_argument('--source_path',
                     help='path to source sentences file',
                     required=True)
-parser.add_argument('--target_path', 
-                    help='path to predicted sentences file', 
+parser.add_argument('--target_path',
+                    help='path to predicted sentences file',
                     required=True)
 parser.add_argument('--reference_path',
                     help='path to reference sentences file',
@@ -76,4 +75,9 @@ plt.title(title)
 plt.xlabel('Metric')
 plt.ylabel('Score')
 plt.ylim([0, 100])
+
+for i, v in enumerate(scores):
+    plt.text(i, v+1, str(round(v, 2)), horizontalalignment='center', fontweight='bold')
+
+
 plt.savefig('media/{}.png'.format(title))

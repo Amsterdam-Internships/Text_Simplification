@@ -2,13 +2,12 @@
 
 import argparse
 import youtokentome as yttm
-import sys
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--input_path', 
+parser.add_argument('--input_path',
                     help='path to data file that needs to be desubworded',
                     required=True)
-parser.add_argument('--model_path', 
+parser.add_argument('--model_path',
                     help='path to subwording model',
                     required=True)
 parser.add_argument('--output_path',
@@ -35,9 +34,9 @@ print('='*100)
 # Decode the subwords using the BPE model
 sentences = []
 for s in subwords:
-    sentence = bpe.decode(s, ignore_ids=[0])
-    sentence = ''.join(sentence)
-    sentences.append(sentence)
+    SENTENCE = bpe.decode(s, ignore_ids=[0])
+    SENTENCE = ''.join(SENTENCE)
+    sentences.append(SENTENCE)
 
 # Write the desubworded sentences to a new file
 with open(output_path, 'w', encoding='utf-8') as f:

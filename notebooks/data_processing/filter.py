@@ -7,25 +7,24 @@
 # Please read the steps and adjust them for your needs.
 # Command: python3 filter.py <source_file_path> <target_file_path> <source_lang> <target_lang>
 
-
-import pandas as pd
-import numpy as np
-import re
 import csv
 import sys
+import pandas as pd
+import numpy as np
+
 
 # display(df) works only if you are in IPython/Jupyter Notebooks or enable:
 #from IPython.display import display
 
 
 def prepare(source_file, target_file, source_lang, target_lang, lower=True):
-    
+
     df_source = pd.read_csv(source_file, names=['Source'], sep="\n", quoting=csv.QUOTE_NONE, skip_blank_lines=False, on_bad_lines="skip")
     df_target = pd.read_csv(target_file, names=['Target'], sep="\n", quoting=csv.QUOTE_NONE, skip_blank_lines=False, on_bad_lines="skip")
     df = pd.concat([df_source, df_target], axis=1)  # Join the two dataframes along columns
     print("Dataframe shape (rows, columns):", df.shape)
 
-    
+
     # Delete nan
     df = df.dropna()
 
@@ -48,10 +47,10 @@ def prepare(source_file, target_file, source_lang, target_lang, lower=True):
         df = df.drop([True]) # Boolean, not string, do not add quotes
     except:
         pass
-    
+
     df = df.reset_index()
     df = df.drop(['Source-Copied'], axis = 1)
-    
+
     print("--- Source-Copied Rows Deleted\t\t--> Rows:", df.shape[0])
 
 
@@ -61,7 +60,7 @@ def prepare(source_file, target_file, source_lang, target_lang, lower=True):
                      ((df['Target'].str.count(' ')+1) > (df['Source'].str.count(' ')+1) * 2) |  \
                      ((df['Source'].str.count(' ')+1) > 200) |  \
                      ((df['Target'].str.count(' ')+1) > 200)
-                
+
     #display(df.loc[df['Too-Long'] == True]) # display only too long rows
     df = df.set_index(['Too-Long'])
 

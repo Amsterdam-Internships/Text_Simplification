@@ -2,14 +2,13 @@
 
 import argparse
 import youtokentome as yttm
-import sys
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--input_path', 
+parser.add_argument('--input_path',
                     help='path to data file that needs to be subworded',
                     required=True)
-parser.add_argument('--model_path', 
-                    help='path to subwording model', 
+parser.add_argument('--model_path',
+                    help='path to subwording model',
                     required=True)
 parser.add_argument('--output_path',
                     help='path to store subworded output file',

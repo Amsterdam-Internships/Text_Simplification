@@ -2,14 +2,13 @@
 
 import argparse
 import youtokentome as yttm
-import sys
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--train_data_path', 
+parser.add_argument('--train_data_path',
                     help='path to training data file',
                     required=True)
-parser.add_argument('--model_path', 
-                    help='path to store subwording model', 
+parser.add_argument('--model_path',
+                    help='path to store subwording model',
                     required=True)
 args=parser.parse_args()
 
@@ -21,7 +20,7 @@ model_path = args.model_path
 with open(train_data_path, 'r', encoding='utf-8') as f:
     sentences = [line.strip() for line in f.readlines()]
     sentences = [s.split() for s in sentences]
-    
+
 # Training model
 yttm.BPE.train(data=train_data_path, vocab_size=5000, model=model_path)
 
