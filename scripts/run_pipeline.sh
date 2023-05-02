@@ -31,25 +31,25 @@ python3 notebooks/data_processing/filter.py NMT-Data/Model_English_C_English_S/d
 python3 notebooks/data_processing/filter.py NMT-Data/Model_English_S_Dutch_S/opensubtitles_en_testing NMT-Data/Model_English_S_Dutch_S/opensubtitles_nl_testing en nl #filter opensubtitles
 
 #build subword models
-python3 notebooks/data_processing/1_train_bpe.py $emea_folder/EMEA.en-nl.nl-filtered.nl $emea_folder/subword_model/yttm_source.model #train bpe for EMEA source
-python3 notebooks/data_processing/1_train_bpe.py $emea_folder/EMEA.en-nl.en-filtered.en $emea_folder/subword_model/yttm_target.model #train bpe for EMEA target
+python3 notebooks/data_processing/1_train_bpe.py --train_data_path $emea_folder/EMEA.en-nl.nl-filtered.nl --model_path $emea_folder/subword_model/yttm_source.model #train bpe for EMEA source
+python3 notebooks/data_processing/1_train_bpe.py --train_data_path $emea_folder/EMEA.en-nl.en-filtered.en --model_path $emea_folder/subword_model/yttm_target.model #train bpe for EMEA target
 
-python3 notebooks/data_processing/1_train_bpe.py NMT-Data/Model_English_C_English_S/data.v1/wiki.unsimplified-filtered.en_c NMT-Data/Model_English_C_English_S/subword_model/yttm_source.model #train bpe for WikiSimple source
-python3 notebooks/data_processing/1_train_bpe.py NMT-Data/Model_English_C_English_S/data.v1/wiki.simple-filtered.en_s NMT-Data/Model_English_C_English_S/subword_model/yttm_target.model #train bpe for WikiSimple target
+python3 notebooks/data_processing/1_train_bpe.py --train_data_path NMT-Data/Model_English_C_English_S/data.v1/wiki.unsimplified-filtered.en_c --model_path NMT-Data/Model_English_C_English_S/subword_model/yttm_source.model #train bpe for WikiSimple source
+python3 notebooks/data_processing/1_train_bpe.py --train_data_path NMT-Data/Model_English_C_English_S/data.v1/wiki.simple-filtered.en_s --model_path NMT-Data/Model_English_C_English_S/subword_model/yttm_target.model #train bpe for WikiSimple target
 
-python3 notebooks/data_processing/1_train_bpe.py NMT-Data/Model_English_S_Dutch_S/opensubtitles_en_testing-filtered.en NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_source.model #train bpe for OpenSubtitles source
-python3 notebooks/data_processing/1_train_bpe.py NMT-Data/Model_English_S_Dutch_S/opensubtitles_nl_testing-filtered.nl NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_target.model #train bpe for OpenSubtitles target
+python3 notebooks/data_processing/1_train_bpe.py --train_data_path NMT-Data/Model_English_S_Dutch_S/opensubtitles_en_testing-filtered.en --model_path NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_source.model #train bpe for OpenSubtitles source
+python3 notebooks/data_processing/1_train_bpe.py --train_data_path NMT-Data/Model_English_S_Dutch_S/opensubtitles_nl_testing-filtered.nl --model_path NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_target.model #train bpe for OpenSubtitles target
 
 
 #subword data
-python3 notebooks/data_processing/2_subword.py $emea_folder/subword_model/yttm_source.model $emea_folder/EMEA.en-nl.nl-filtered.nl $emea_folder/EMEA.en-nl.nl-filtered.nl-subword.nl #subword EMEA source
-python3 notebooks/data_processing/2_subword.py $emea_folder/subword_model/yttm_target.model $emea_folder/EMEA.en-nl.en-filtered.en $emea_folder/EMEA.en-nl.en-filtered.en-subword.en #subword EMEA target
+python3 notebooks/data_processing/2_subword.py --model_path $emea_folder/subword_model/yttm_source.model --input_path $emea_folder/EMEA.en-nl.nl-filtered.nl --output_path $emea_folder/EMEA.en-nl.nl-filtered.nl-subword.nl #subword EMEA source
+python3 notebooks/data_processing/2_subword.py --model_path $emea_folder/subword_model/yttm_target.model --input_path $emea_folder/EMEA.en-nl.en-filtered.en --output_path $emea_folder/EMEA.en-nl.en-filtered.en-subword.en #subword EMEA target
 
-python3 notebooks/data_processing/2_subword.py NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_source.model NMT-Data/Model_English_C_English_S/data.v1/wiki.unsimplified-filtered.en_c NMT-Data/Model_English_C_English_S/data.v1/wiki.unsimplified-filtered.en_c-subword.en_c #subword WikiSimple
-python3 notebooks/data_processing/2_subword.py NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_target.model NMT-Data/Model_English_C_English_S/data.v1/wiki.simple-filtered.en_s NMT-Data/Model_English_C_English_S/data.v1/wiki.simple-filtered.en_s-subword.en_s #subword WikiSimple
+python3 notebooks/data_processing/2_subword.py --model_path NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_source.model --input_path NMT-Data/Model_English_C_English_S/data.v1/wiki.unsimplified-filtered.en_c --output_path NMT-Data/Model_English_C_English_S/data.v1/wiki.unsimplified-filtered.en_c-subword.en_c #subword WikiSimple
+python3 notebooks/data_processing/2_subword.py --model_path NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_target.model --input_path NMT-Data/Model_English_C_English_S/data.v1/wiki.simple-filtered.en_s --output_path NMT-Data/Model_English_C_English_S/data.v1/wiki.simple-filtered.en_s-subword.en_s #subword WikiSimple
 
-python3 notebooks/data_processing/2_subword.py NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_source.model NMT-Data/Model_English_S_Dutch_S/opensubtitles_en_testing-filtered.en NMT-Data/Model_English_S_Dutch_S/opensubtitles_en-filtered.en-subword.en #subword OpenSubtitles source
-python3 notebooks/data_processing/2_subword.py NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_target.model NMT-Data/Model_English_S_Dutch_S/opensubtitles_nl_testing-filtered.nl NMT-Data/Model_English_S_Dutch_S/opensubtitles_nl-filtered.nl-subword.nl #subword Opensubtitles target
+python3 notebooks/data_processing/2_subword.py --model_path NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_source.model --input_path NMT-Data/Model_English_S_Dutch_S/opensubtitles_en_testing-filtered.en --output_path NMT-Data/Model_English_S_Dutch_S/opensubtitles_en-filtered.en-subword.en #subword OpenSubtitles source
+python3 notebooks/data_processing/2_subword.py --model_path NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_target.model --input_path NMT-Data/Model_English_S_Dutch_S/opensubtitles_nl_testing-filtered.nl --output_path NMT-Data/Model_English_S_Dutch_S/opensubtitles_nl-filtered.nl-subword.nl #subword Opensubtitles target
 
 #Split data into train/test/dev
 python3 notebooks/data_processing/train_dev_test_split.py 2000 2000 $emea_folder/EMEA.en-nl.nl-filtered.nl-subword.nl $emea_folder/EMEA.en-nl.en-filtered.en-subword.en #split EMEA data
@@ -83,20 +83,20 @@ omnt_train -config config/model_3.yaml -src_vocab NMT-Data/Model_English_S_Dutch
 
 #Run input data through pipeline
 #model 1
-python3 notebooks/data_processing/2_subword.py $emea_folder/subword_model/yttm_source.model eval_data/NL_test_org eval_data/NL_test_org_subword_1
+python3 notebooks/data_processing/2_subword.py --model_path $emea_folder/subword_model/yttm_source.model --input_path eval_data/NL_test_org --output_path eval_data/NL_test_org_subword_1
 onmt_translate -ban_unk_token -model $emea_folder/model/yttm_model_1000.pt -src eval_data/NL_test_org_subword_1 -output $emea_folder/model_output/Model_1_pred.txt -verbose 
-python3 notebooks/data_processing/3_desubword.py $emea_folder/subword_model/yttm_target.model $emea_folder/model_output/Model_1_pred.txt $emea_folder/model_output/Model_1_pred.txt.desubword
+python3 notebooks/data_processing/3_desubword.py --model_path $emea_folder/subword_model/yttm_target.model --input_path $emea_folder/model_output/Model_1_pred.txt --output_path $emea_folder/model_output/Model_1_pred.txt.desubword
 
 #model 2
-python3 notebooks/data_processing/2_subword.py NMT-Data/Model_English_C_English_S/subword_model/yttm_source.model $emea_folder/model_output/Model_1_pred.txt.desubword eval_data/NL_test_org_subword_2
+python3 notebooks/data_processing/2_subword.py --model_path NMT-Data/Model_English_C_English_S/subword_model/yttm_source.model $emea_folder/model_output/Model_1_pred.txt.desubword eval_data/NL_test_org_subword_2
 onmt_translate -ban_unk_token -model NMT-Data/Model_English_C_English_S/model/yttm_model_1000.pt -src eval_data/NL_test_org_subword_2 -output NMT-Data/Model_English_C_English_S/model_output/Model_2_pred.txt -verbose
-python3 notebooks/data_processing/3_desubword.py NMT-Data/Model_English_C_English_S/subword_model/yttm_target.model NMT-Data/Model_English_C_English_S/model_output/Model_2_pred.txt NMT-Data/Model_English_C_English_S/model_output/Model_2_pred.txt.desubword
+python3 notebooks/data_processing/3_desubword.py --model_path NMT-Data/Model_English_C_English_S/subword_model/yttm_target.model --input_path NMT-Data/Model_English_C_English_S/model_output/Model_2_pred.txt --output_path NMT-Data/Model_English_C_English_S/model_output/Model_2_pred.txt.desubword
 
 #model 3
-python3 notebooks/data_processing/2_subword.py NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_source.model NMT-Data/Model_English_C_English_S/model_output/Model_2_pred.txt.desubword eval_data/NL_test_org_subword_3
+python3 notebooks/data_processing/2_subword.py --model_path NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_source.model NMT-Data/Model_English_C_English_S/model_output/Model_2_pred.txt.desubword eval_data/NL_test_org_subword_3
 onmt_translate -ban_unk_token -model NMT-Data/Model_English_S_Dutch_S/model/mybasemodel_step_9000.pt -src eval_data/NL_test_org_subword_3 -output NMT-Data/Model_English_S_Dutch_S/model_output/Model_3_pred.txt -verbose
-python3 notebooks/data_processing/3_desubword.py NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_target.model NMT-Data/Model_English_S_Dutch_S/model_output/Model_3_pred.txt NMT-Data/Model_English_S_Dutch_S/model_output/Model_3_pred.txt.desubword
+python3 notebooks/data_processing/3_desubword.py --model_path NMT-Data/Model_English_S_Dutch_S/subword_model/yttm_target.model NMT-Data/Model_English_S_Dutch_S/model_output/Model_3_pred.txt NMT-Data/Model_English_S_Dutch_S/model_output/Model_3_pred.txt.desubword
 
 #Evaluate Results
-python3 notebooks/evaluate_script.py NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_org NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_simp NMT-Data/Model_English_S_Dutch_S/model_output/Model_3_pred.txt.desubword
+#python3 notebooks/evaluate_script.py NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_org NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_simp NMT-Data/Model_English_S_Dutch_S/model_output/Model_3_pred.txt.desubword
 '''
