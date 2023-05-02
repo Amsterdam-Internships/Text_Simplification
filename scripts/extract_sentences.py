@@ -59,7 +59,7 @@ def add_to_dict(sent):
 
 base_folder = os.path.dirname(en_file_path)
 
-num_samples_general = 2000000
+num_samples_general = 20000000
 samples_file_general = f"{base_folder}/opensubtitles_samples_{num_samples_general}"
 try:
     extracted_sentences = json.load(open(samples_file_general, 'r'))
