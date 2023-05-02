@@ -3,6 +3,8 @@ This script extracts sentences from the opensubtitles corpus.
 The sentences are chosen based on their similarity to a number of reference sentences.
 '''
 import argparse
+import json
+import os
 from tqdm import tqdm
 
 from datasets import load_dataset
@@ -55,10 +57,19 @@ def add_to_dict(sent):
     extracted_sentences["sentence{}".format(counter)]['sentence en'] = sent['translation']['en']
     counter += 1
 
-print('extracting opensubtitles entries...')
-small_dataset = dataset.take(20000000)
-for example in tqdm(small_dataset):
-    add_to_dict(example)
+base_folder = os.path.dirname(en_file_path)
+
+num_samples_general = 2000000
+samples_file_general = f"{base_folder}/opensubtitles_samples_{num_samples_general}"
+try:
+    extracted_sentences = json.load(open(samples_file_general, 'r'))
+except:
+    print('extracting opensubtitles entries...')
+    small_dataset = dataset.take(num_samples_general)
+    for example in tqdm(small_dataset):
+        add_to_dict(example)
+    with open(samples_file_general, 'w') as f:
+        json.dump(extracted_sentences, f)
 
 comparison_sentences = []
 print('extracting dutch sentences for comparison...')
