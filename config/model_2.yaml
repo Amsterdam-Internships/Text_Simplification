@@ -28,6 +28,8 @@ train_steps: 10000
 # Batching
 bucket_size: 262144
 batch_type: "tokens"
+world_size: 1
+gpu_ranks: [0]
 batch_size: 1024
 valid_batch_size: 2048
 accum_count: [4]

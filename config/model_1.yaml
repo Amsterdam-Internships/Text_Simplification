@@ -21,8 +21,8 @@ Parameters:
 # General opts
 save_model: NMT-Data/Model_Dutch_C_English_C/model/mybasemodel
 save_checkpoint_steps: 10000
-valid_steps: 10000
-train_steps: 200000
+valid_steps: 1000
+train_steps: 10000
 
 # Batching
 bucket_size: 262144
