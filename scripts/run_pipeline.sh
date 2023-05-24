@@ -3,8 +3,8 @@ This file executes the full pipeline for pivot based neural machine translation.
 This includes downloading and preprocessing data, subwording data, training 3 translation models, and evaluating results on a test set.
 '''
 
-pip install openNMT-py
-pip install sacremoses
+pip3 install openNMT-py
+pip3 install sacremoses
 
 data_folder=NMT-Data
 emea_folder=$data_folder/Model_Dutch_C_English_C
