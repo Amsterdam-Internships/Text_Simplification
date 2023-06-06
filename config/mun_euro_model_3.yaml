@@ -1,0 +1,62 @@
+## Where the samples will be written
+save_data: NMT-Data/Model_English_S_Dutch_S/run/
+
+## Where the vocab(s) will be written
+tgt_vocab: NMT-Data/Model_English_S_Dutch_S/run/emea_vocab.src
+src_vocab: NMT-Data/Model_English_S_Dutch_S/run/emea_vocab.tgt
+
+# Prevent overwriting existing files in the folder
+overwrite: False
+
+# Corpus opts:
+data:
+    corpus_1:
+        path_tgt: NMT-Data/europarl/europarl.nl-filtered.nl-subword.nl.train
+        path_src: NMT-Data/europarl/europarl.en-filtered.en-subword.en.train
+    valid:
+        path_tgt: NMT-Data/europarl/europarl.nl-filtered.nl-subword.nl.dev
+        path_src: NMT-Data/europarl/europarl.en-filtered.en-subword.en.dev
+
+# General opts
+save_model: /content/drive/MyDrive/Text_Simplification/NMT-Data/europarl/model/3_mymunbasemodel
+save_checkpoint_steps: 10000
+valid_steps: 5000
+train_steps: 10000
+
+# Batching
+bucket_size: 262144
+batch_type: "tokens"
+world_size: 1
+num_workers: 0
+gpu_ranks: [0]
+batch_size: 4096
+valid_batch_size: 2048
+accum_count: [4]
+accum_steps: [0]
+
+# Optimization
+model_dtype: "fp16"
+optim: "adam"
+learning_rate: 2
+warmup_steps: 8000
+decay_method: "noam"
+adam_beta2: 0.998
+max_grad_norm: 0
+label_smoothing: 0.1
+param_init: 0
+param_init_glorot: true
+normalization: "tokens"
+
+# Model
+encoder_type: transformer
+decoder_type: transformer
+position_encoding: true
+enc_layers: 6
+dec_layers: 6
+heads: 8
+hidden_size: 512
+word_vec_size: 512
+transformer_ff: 2048
+dropout_steps: [0]
+dropout: [0.1]
+attention_dropout: [0.1]
