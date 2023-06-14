@@ -25,7 +25,7 @@ tar -xvf $wikisimple_folder/WikiSimple.tar.gz -C $wikisimple_folder #WikiSimple 
 # if NMT-Data/Model_English_S_Dutch_S/opensubtitles_en_testing doesnt exist:
 if [[ ! -f NMT-Data/Model_English_S_Dutch_S/opensubtitles_en_testing ]] #OpenSubtiltes Download params: (--reference file, --output_path_nl, --output_path_en, --num_samples --)
 then
-    python scripts/extract_sentences.py --reference_file NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_org
+    python scripts/extract_sentences.py --reference_file NMT-Data/CleanSimpleMedicalCorpora.txt --output_path_en $opensubtitles_folder/opensubtitles_en_testing --output_path_nl $opensubtitles_folder/opensubtitles_nl_testing
 else 
     echo "OpenSubtitles Medical Subset already exists"
 fi

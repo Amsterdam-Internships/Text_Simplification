@@ -21,19 +21,9 @@ sudo wget -c https://cs.pomona.edu/~dkauchak/simplification/data.v1/data.v1.tar.
 tar -xvf $wikisimple_folder/WikiSimple.tar.gz -C $wikisimple_folder #WikiSimple unzip
 #sudo unzip $wikisimple_folder/WikiSimple.tar.gz -d $wikisimple_folder
 
-
-# if NMT-Data/Model_English_S_Dutch_S/opensubtitles_en_testing doesnt exist:
-if [[ ! -f NMT-Data/Model_English_S_Dutch_S/opensubtitles_en_testing ]] #OpenSubtiltes Download params: (--reference file, --output_path_nl, --output_path_en, --num_samples --)
-then
-    python scripts/extract_sentences.py --reference_file NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_org
-else 
-    echo "OpenSubtitles Medical Subset already exists"
-fi
-
 #Preprocess data
 #python3 notebooks/data_processing/filter.py $emea_folder/EMEA.en-nl.nl $emea_folder/EMEA.en-nl.en nl en #filter EMEA
 #python3 notebooks/data_processing/filter.py $wikisimple_folder/data.v1/wiki.unsimplified $wikisimple_folder/data.v1/wiki.simple en_c en_s #filter WikiSimple
-#python3 notebooks/data_processing/filter.py $opensubtitles_folder/medsubset_bert.en $opensubtitles_folder/medsubset_bert.nl en nl #filter opensubtitles
 
 #build subword models
 #python3 notebooks/data_processing/1_train_bpe.py --train_data_path $emea_folder/EMEA.en-nl.nl-filtered.nl --model_path $emea_folder/subword_model/yttm_source.model #train bpe for EMEA source
@@ -41,9 +31,6 @@ fi
 
 #python3 notebooks/data_processing/1_train_bpe.py --train_data_path $wikisimple_folder/data.v1/wiki.unsimplified-filtered.en_c --model_path NMT-Data/Model_English_C_English_S/subword_model/yttm_source.model #train bpe for WikiSimple source
 #python3 notebooks/data_processing/1_train_bpe.py --train_data_path $wikisimple_folder/data.v1/wiki.simple-filtered.en_s --model_path NMT-Data/Model_English_C_English_S/subword_model/yttm_target.model #train bpe for WikiSimple target
-
-#python3 notebooks/data_processing/1_train_bpe.py --train_data_path $opensubtitles_folder/medsubset_bert.en-filtered.en --model_path NMT-Data/Model_English_S_Dutch_S/subword_model/medsubset_bert_source.model #train bpe for OpenSubtitles source
-#python3 notebooks/data_processing/1_train_bpe.py --train_data_path $opensubtitles_folder/medsubset_bert.nl-filtered.nl --model_path NMT-Data/Model_English_S_Dutch_S/subword_model/medsubset_bert_target.model #train bpe for OpenSubtitles target
 
 
 #subword data
@@ -53,15 +40,10 @@ fi
 #python3 notebooks/data_processing/2_subword.py --model_path $wikisimple_folder/subword_model/yttm_source.model --input_path NMT-Data/Model_English_C_English_S/data.v1/wiki.unsimplified-filtered.en_c --output_path NMT-Data/Model_English_C_English_S/data.v1/wiki.unsimplified-filtered.en_c-subword.en_c #subword WikiSimple
 #python3 notebooks/data_processing/2_subword.py --model_path $wikisimple_folder/subword_model/yttm_target.model --input_path NMT-Data/Model_English_C_English_S/data.v1/wiki.simple-filtered.en_s --output_path NMT-Data/Model_English_C_English_S/data.v1/wiki.simple-filtered.en_s-subword.en_s #subword WikiSimple
 
-#python3 notebooks/data_processing/2_subword.py --model_path $opensubtitles_folder/subword_model/medsubset_bert_source.model --input_path NMT-Data/Model_English_S_Dutch_S/medsubset_bert.en-filtered.en --output_path NMT-Data/Model_English_S_Dutch_S/medsubset_bert.en-filtered.en-subword.en #subword OpenSubtitles source
-#python3 notebooks/data_processing/2_subword.py --model_path $opensubtitles_folder/subword_model/medsubset_bert_target.model --input_path NMT-Data/Model_English_S_Dutch_S/medsubset_bert.nl-filtered.nl --output_path NMT-Data/Model_English_S_Dutch_S/medsubset_bert.nl-filtered.nl-subword.nl #subword Opensubtitles target
-
 #Split data into train/test/dev
 #python3 notebooks/data_processing/train_dev_test_split.py 2000 2000 $emea_folder/EMEA.en-nl.nl-filtered.nl-subword.nl $emea_folder/EMEA.en-nl.en-filtered.en-subword.en #split EMEA data
 
 #python3 notebooks/data_processing/train_dev_test_split.py 2000 2000 $wikisimple_folder/data.v1/wiki.unsimplified-filtered.en_c-subword.en_c NMT-Data/Model_English_C_English_S/data.v1/wiki.simple-filtered.en_s-subword.en_s #split WikiSimple data
-
-#python3 notebooks/data_processing/train_dev_test_split.py 2000 2000 $opensubtitles_folder/medsubset_bert.en-filtered.en-subword.en NMT-Data/Model_English_S_Dutch_S/medsubset_bert.nl-filtered.nl-subword.nl #split OpenSubtitles data
 
 #Build Vocab
 #EMEA
