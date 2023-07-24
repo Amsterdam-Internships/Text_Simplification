@@ -17,7 +17,6 @@ Explain briefly what's where so people can find their way around. For example:
 There are the following folders in the structure:
 
 
-1) [`src`](./src): Folder for all source files specific to this project
 1) [`scripts`](./scripts): Folder with example scripts for performing different tasks (could serve as usage documentation)
 1) ['notebooks'] (./notebooks): folder containing notebooks for running the pipeline as well as data-processing scripts for filtering, subwording, desubwording and splitting data
 1) [`media`](./media): Folder containing media files (icons, video)
