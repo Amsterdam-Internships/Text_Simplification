@@ -18,7 +18,7 @@ There are the following folders in the structure:
 
 
 1) [`scripts`](./scripts): Folder with example scripts for performing different tasks (could serve as usage documentation)
-1) [`notebooks`] (./notebooks): folder containing notebooks for running the pipeline as well as data-processing scripts for filtering, subwording, desubwording and splitting data
+1) [`notebooks`](./notebooks): folder containing notebooks for running the pipeline as well as data-processing scripts for filtering, subwording, desubwording and splitting data
 1) [`media`](./media): Folder containing media files (icons, video)
 1) ['NMT-Data'](./NMT-Data): Folder where all data and models will be saved
 1) [`config`](./config): Folder containing configuration files for the training of the models
