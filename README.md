@@ -1,8 +1,7 @@
 # Automatic Text Simplification for Low Resource Languages using a Pivot Approach
-#TODO! 
 
-This repository contains the code to run a pivot-based text simplification for the dutch medical domain. It trains 3 models:
--1st model: Translates complex dutch sentences to complex english sentences 
+This repository contains the code to run a pivot-based text simplification for the Dutch medical domain. It trains 3 models:
+-1st model: Translates complex dutch sentences to complex english sentences
 -2nd Model: Simplifies complex english sentences to simple english sentences
 -3rd Model: Translates simple english sentences to simple dutch sentences
 
@@ -26,7 +25,6 @@ There are the following folders in the structure:
 1) [`config`](./config): Folder containing configuration files for the training of the models
 
 ## Installation
-
 Explain how to set up everything. 
 Let people know if there are weird dependencies - if so feel free to add links to guides and tutorials.
 
@@ -45,26 +43,26 @@ A person should be able to clone this repo, follow your instructions blindly, an
 
 
 ## Usage
-To Run the pipeline the script expects evaluation data to be uploaded:
-original sentences: NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_org
-simplified sentences: NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_simp
+To Run the pipeline the script expects evaluation data to be uploaded: <br>
+Original sentences: NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_org <br>
+Simplified sentences: NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_simp
 
-The pipeline script also expects some reference sentences in order to extract useful sentences from the opensubtitles domain, by default these sentences are taken from the original sentences in the evaluation data. If you wish to change this you can do so in the run_pipeline.sh file by changing reference_file argument in the following line:
+In many of our experiments we use in-domain data, extracted from the Opensubtitles corpus on the basis of similarity to a reference corpus. To generate these in-domain data use the following script.
 
-    python scripts/extract_sentences.py --reference_file NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_org
+    python scripts/extract_sentences.py
 
-Once this is done you can run scripts/run_pipeline.sh (bear in mind that training the models requires a machine with a gpu)
+If you wish to create your own in-domain subset you can substitute the reference_file, as well as tweak other arguments such as encoding_method and num_samples.
 
-The pipeline script downloads data, processes it, trains the relevant models, performs the simplification and evaluates the simplification.
+By default, the extract_sentences.py script will generate an in-domain medical translation corpora. Which is used in many of our pipelines. The default pipeline script downloads data, processes it, trains the relevant models, performs the simplification and evaluates the simplification. It can be executed using the following script:
 
 ```
 $ /scripts/run_pipeline.sh
 ```
----
 
-## How it works
+Different pipeline setups are available in the scripts folder.
 
-#TODO!
+
+
 ---
 ## Acknowledgements
 Our code uses preproccesing scripts from [MT-Preparation](https://github.com/ymoslem/MT-Preparation)
