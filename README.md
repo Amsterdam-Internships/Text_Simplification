@@ -18,16 +18,13 @@ There are the following folders in the structure:
 
 
 1) [`scripts`](./scripts): Folder with example scripts for performing different tasks (could serve as usage documentation)
-1) ['notebooks'] (./notebooks): folder containing notebooks for running the pipeline as well as data-processing scripts for filtering, subwording, desubwording and splitting data
+1) [`notebooks`] (./notebooks): folder containing notebooks for running the pipeline as well as data-processing scripts for filtering, subwording, desubwording and splitting data
 1) [`media`](./media): Folder containing media files (icons, video)
 1) ['NMT-Data'](./NMT-Data): Folder where all data and models will be saved
 1) [`config`](./config): Folder containing configuration files for the training of the models
 
 ## Installation
-Explain how to set up everything. 
-Let people know if there are weird dependencies - if so feel free to add links to guides and tutorials.
-
-A person should be able to clone this repo, follow your instructions blindly, and still end up with something *fully working*!
+You can install this repo by following these steps:
 
 1) Clone this repository:
     ```bash
@@ -39,7 +36,6 @@ A person should be able to clone this repo, follow your instructions blindly, an
     pip install -r requirements.txt
     ```
 ---
-
 
 ## Usage
 To Run the pipeline the script expects evaluation data to be uploaded: <br>
