@@ -1,13 +1,19 @@
 # Automatic Text Simplification for Low Resource Languages using a Pivot Approach
 
-This repository contains the code to run a pivot-based text simplification for the Dutch medical domain. It trains 3 models:
--1st model: Translates complex dutch sentences to complex english sentences
--2nd Model: Simplifies complex english sentences to simple english sentences
--3rd Model: Translates simple english sentences to simple dutch sentences
+This repository contains the code to run a pivot-based text simplification for the Dutch medical domain and municipal domains.
+The full pipeline consists of the 3 models:
+* 1st model (M<sup>NL&rarr;EN</sup>): Translates complex dutch sentences to complex english sentences
+* 2nd Model (M<sup>C&rarr;S</sup>): Simplifies complex english sentences to simple english sentences
+* 3rd Model (M<sup>EN&rarr;NL</sup>): Translates simple english sentences to simple dutch sentences
 
-On top of training the models the repo performs the simplification and evaluates its quality using a number of automatic evaluation metrics (BLEU,SARI,METEOR)
+On top of training the models, the repo contains code for evaluating the pipeline's quality using a number of automatic evaluation metrics (BLEU,SARI,METEOR).
 
-![](./media/pivot_pipeline_TS.png)
+[//]: # (![]&#40;./media/pivot_pipeline_TS.png&#41;)
+<div align="center">
+   <img src="./media/pivot_pipeline_TS.png" width="600"/>
+   <br>
+   <em>Figure 1. Pivot pipeline for text simplification</em>
+</div>
 
 ## Project Folder Structure
 
