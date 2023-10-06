@@ -49,26 +49,56 @@ You can install this repo by following these steps:
 ---
 
 ## Usage
-To Run the pipeline the script expects evaluation data to be uploaded: <br>
-Original sentences: NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_org <br>
-Simplified sentences: NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_simp
+The [`scripts`](./scripts) folder contains individual bash scripts for all of our experiments.
+Each script is self-sufficient and covers the full setup and execution of the experiment:
+- installation of requirements
+- downloading corresponding data
+- possibly extracting a domain-specific subsets of the translation corpora
+- preprocessing, filtering and tokenization of the data
+- all steps required for the training of each of the translation models (using OpenNMT)
+- inference and evaluation on the test dataset
 
-In many of our experiments we use in-domain data, extracted from the Opensubtitles corpus on the basis of similarity to a reference corpus. To generate these in-domain data use the following script.
+### Medical pipeline
+To run the medical pipeline, the scripts expect evaluation data to be uploaded:
+* Original sentences to `NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_org`
+* Simplified sentences to `NMT-Data/Eval_Medical_Dutch_C_Dutch_S/NL_test_simp`
 
+The medical evaluation data has been provided by the authors of
+> Evers, Marloes. Low-Resource Neural Machine Translation for Simplification of Dutch Medical Text. Diss. Tilburg University, 2021.
+
+### Municipal pipeline
+To run the municipal pipeline, the scripts expect evaluation data to be uploaded:
+* Original sentences to `NMT-Data/Eval_Municipal/complex`
+* Simplified sentences to `NMT-Data/Eval_Municipal/simple`
+
+The municipal evaluation data is available on request for research purposes.
+
+[//]: # (Please contact [Iva Gornishka]&#40;i.gornishka@amsterdam.nl&#41;.)
+[//]: # (TODO: Uncomment after anonimity period.)
+
+### In-domain data extraction
+In many of our experiments we use in-domain data, extracted from the Opensubtitles corpus on the basis of similarity to a reference corpus.
+To generate these in-domain data use the following script.
+
+```commandline
     python scripts/extract_sentences.py
-
-If you wish to create your own in-domain subset you can substitute the reference_file, as well as tweak other arguments such as encoding_method and num_samples.
-
-By default, the extract_sentences.py script will generate an in-domain medical translation corpora. Which is used in many of our pipelines. The default pipeline script downloads data, processes it, trains the relevant models, performs the simplification and evaluates the simplification. It can be executed using the following script:
-
-```
-$ /scripts/run_pipeline.sh
 ```
 
-Different pipeline setups are available in the scripts folder.
-
+If you wish to create your own in-domain subset you can substitute the reference_file,
+the output paths for the Dutch and English parts of the extracted subset,
+as well as tweak other arguments such as encoding_method and num_samples.
+For full documentaion, `python scripts/extract_sentences.py --help`
 
 
 ---
 ## Acknowledgements
+[//]: # (This repository was created in collaboration with [Amsterdam Intelligence]&#40;https://amsterdamintelligence.com/&#41; )
+[//]: # (for the [City of Amsterdam]&#40;https://www.amsterdam.nl/innovation/&#41;.)
+[//]: # (TODO: Uncomment after anonimity period)
+
+We thank the [Communications Department of the City of Amsterdam](https://www.amsterdam.nl/bestuur-organisatie/organisatie/bedrijfsvoering/directie-communicatie/)
+for providing us with a set of simplified documents which has been used for the creation of the municipal evaluation dataset.
+
+We thank [Marloes Evers](https://www.linkedin.com/in/marloes-evers-36675b134/) for providing us with the medical evaluation dataset.
+
 Our code uses preproccesing scripts from [MT-Preparation](https://github.com/ymoslem/MT-Preparation)
