@@ -7,8 +7,7 @@ This repository contains the code to run a pivot-based text simplification for t
 
 On top of training the models the repo performs the simplification and evaluates its quality using a number of automatic evaluation metrics (BLEU,SARI,METEOR)
 
-![](media/Pipeline_Text_Simplification_Pivot.pdf)
-
+![](./media/pivot_pipeline_TS.png)
 
 ## Project Folder Structure
 
