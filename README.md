@@ -22,11 +22,17 @@ Explain briefly what's where so people can find their way around. For example:
 There are the following folders in the structure:
 
 
-1) [`scripts`](./scripts): Folder with example scripts for performing different tasks (could serve as usage documentation)
-1) [`notebooks`](./notebooks): folder containing notebooks for running the pipeline as well as data-processing scripts for filtering, subwording, desubwording and splitting data
-1) [`media`](./media): Folder containing media files (icons, video)
-1) [`NMT-Data`](./NMT-Data): Folder where all data and models will be saved
+1) [`scripts`](./scripts): Folder with the scripts used to perform all experiments,
+including individual bash scripts for each one of the pivot-based models pipelines and
+a python script for the [gpt-based experiment](./scripts/chatgpt.py).
+1) [`src`](./src): Folder containing all supporting code, such as
+preprocessing and filtering scripts, tokenization,
+extraction of domain-specific subsets of the translation corpora, etc.
 1) [`config`](./config): Folder containing configuration files for the training of the models
+1) [`NMT-Data`](./NMT-Data): Folder where all data will be downloaded and models will be saved
+1) [`media`](./media): Folder containing media files for demo purposes
+
+[//]: # (1&#41; [`notebooks`]&#40;./notebooks&#41;: folder containing notebooks for running the pipeline as well as data-processing scripts for filtering, subwording, desubwording and splitting data)
 
 ## Installation
 You can install this repo by following these steps:
