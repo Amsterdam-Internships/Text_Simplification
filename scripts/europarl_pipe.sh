@@ -59,7 +59,7 @@ fi
 #WikiSimple
 #touch $wikisimple_folder/run/vocab.src; #create empty files where vocab will be stored
 #touch $wikisimple_folder/run/vocab.tgt;
-#onmt_build_vocab -config config/model_2.yaml -overwrite True #Build vocab
+#onmt_build_vocab -config config/model_en_c-s.yaml -overwrite True #Build vocab
 
 #OpenSubtitles
 #touch $opensubtitles_folder/run/emea_vocab.src; #create empty files where vocab will be stored
@@ -68,7 +68,7 @@ fi
 
 #Train Models
 #onmt_train -config config/mun_model_1.yaml -src_vocab NMT-Data/europarl/run/ext_mun_vocab.src -tgt_vocab NMT-Data/europarl/run/ext_mun_vocab.tgt #Train Emea model
-#onmt_train -config config/model_2.yaml #-src_vocab $wikisimple_folder/run/.vocab.src -tgt_vocab $wikisimple_folder/run/.vocab.tgt #Train WikiSimple model
+#onmt_train -config config/model_en_c-s.yaml #-src_vocab $wikisimple_folder/run/.vocab.src -tgt_vocab $wikisimple_folder/run/.vocab.tgt #Train WikiSimple model
 #onmt_train -config config/mun_euro_model_3.yaml #-src_vocab NMT-Data/Model_English_S_Dutch_S/run/.vocab.src -tgt_vocab NMT-Data/Model_English_S_Dutch_S/run/.vocab.tgt #train OpenSubtitles Model
 
 #Run input data through pipeline
