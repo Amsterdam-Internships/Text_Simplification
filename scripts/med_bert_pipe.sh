@@ -67,7 +67,7 @@ python3 notebooks/data_processing/train_dev_test_split.py 2000 2000 $opensubtitl
 #EMEA
 touch $emea_folder/run/vocab.src; #create empty files where vocab will be stored
 touch $emea_folder/run/vocab.tgt;
-onmt_build_vocab -config config/model_1.yaml -overwrite True #Build vocab
+onmt_build_vocab -config config/model_nl-en_emea.yaml -overwrite True #Build vocab
 
 #WikiSimple
 touch $wikisimple_folder/run/vocab.src; #create empty files where vocab will be stored
@@ -80,7 +80,7 @@ touch $opensubtitles_folder/run/medbert_vocab.tgt;
 onmt_build_vocab -config config/model_3_bert.yaml -overwrite True #build vocab
 
 #Train Models
-#onmt_train -config config/model_1.yaml #-src_vocab $emea_folder/run/.vocab.src -tgt_vocab $emea_folder/run/.vocab.tgt #Train Emea model
+#onmt_train -config config/model_nl-en_emea.yaml #-src_vocab $emea_folder/run/.vocab.src -tgt_vocab $emea_folder/run/.vocab.tgt #Train Emea model
 #onmt_train -config config/model_2.yaml #-src_vocab $wikisimple_folder/run/.vocab.src -tgt_vocab $wikisimple_folder/run/.vocab.tgt #Train WikiSimple model
 #onmt_train -config config/model_3_bert.yaml #-src_vocab NMT-Data/Model_English_S_Dutch_S/run/.vocab.src -tgt_vocab NMT-Data/Model_English_S_Dutch_S/run/.vocab.tgt #train OpenSubtitles Model
 
