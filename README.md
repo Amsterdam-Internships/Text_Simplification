@@ -92,12 +92,14 @@ For full documentaion, `python scripts/extract_sentences.py --help`
 
 ---
 ## Acknowledgements
+
 [//]: # (This repository was created in collaboration with [Amsterdam Intelligence]&#40;https://amsterdamintelligence.com/&#41; )
 [//]: # (for the [City of Amsterdam]&#40;https://www.amsterdam.nl/innovation/&#41;.)
-[//]: # (TODO: Uncomment after anonimity period)
 
-We thank the [Communications Department of the City of Amsterdam](https://www.amsterdam.nl/bestuur-organisatie/organisatie/bedrijfsvoering/directie-communicatie/)
-for providing us with a set of simplified documents which has been used for the creation of the municipal evaluation dataset.
+[//]: # (We thank the [Communications Department of the City of Amsterdam]&#40;https://www.amsterdam.nl/bestuur-organisatie/organisatie/bedrijfsvoering/directie-communicatie/&#41; )
+[//]: # (for providing us with a set of simplified documents which has been used for the creation of the municipal evaluation dataset.)
+
+[//]: # (TODO: Uncomment after anonimity period)
 
 We thank [Marloes Evers](https://www.linkedin.com/in/marloes-evers-36675b134/) for providing us with the medical evaluation dataset.
 
