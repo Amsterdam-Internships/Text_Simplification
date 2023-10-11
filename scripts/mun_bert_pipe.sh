@@ -74,12 +74,12 @@ onmt_build_vocab -config config/model_en_c-s.yaml -overwrite True #Build vocab
 #OpenSubtitles
 touch $opensubtitles_folder/run/mun_bert_vocab.src; #create empty files where vocab will be stored
 touch $opensubtitles_folder/run/mun_bert_vocab.tgt;
-onmt_build_vocab -config config/mun_model_3_bert.yaml -overwrite True #build vocab
+onmt_build_vocab -config config/model_en-nl_munsubset_bert.yaml -overwrite True #build vocab
 
 #Train Models
 #onmt_train -config config/model_nl-en_europarl.yaml #-src_vocab $emea_folder/run/.vocab.src -tgt_vocab $emea_folder/run/.vocab.tgt #Train Emea model
 #onmt_train -config config/model_en_c-s.yaml #-src_vocab $wikisimple_folder/run/.vocab.src -tgt_vocab $wikisimple_folder/run/.vocab.tgt #Train WikiSimple model
-onmt_train -config config/mun_model_3_bert.yaml #-src_vocab NMT-Data/Model_English_S_Dutch_S/run/.vocab.src -tgt_vocab NMT-Data/Model_English_S_Dutch_S/run/.vocab.tgt #train OpenSubtitles Model
+onmt_train -config config/model_en-nl_munsubset_bert.yaml #-src_vocab NMT-Data/Model_English_S_Dutch_S/run/.vocab.src -tgt_vocab NMT-Data/Model_English_S_Dutch_S/run/.vocab.tgt #train OpenSubtitles Model
 
 #Run input data through pipeline
 #model 1
