@@ -49,7 +49,7 @@ tar -xvf $wikisimple_folder/WikiSimple.tar.gz -C $wikisimple_folder #WikiSimple 
 #EMEA
 #touch $emea_folder/run/vocab.src; #create empty files where vocab will be stored
 #touch $emea_folder/run/vocab.tgt;
-#onmt_build_vocab -config config/mun_model_1.yaml -overwrite True #Build vocab
+#onmt_build_vocab -config config/model_nl-en_emea.yaml -overwrite True #Build vocab
 
 #WikiSimple
 #touch $wikisimple_folder/run/vocab.src; #create empty files where vocab will be stored
@@ -62,7 +62,7 @@ tar -xvf $wikisimple_folder/WikiSimple.tar.gz -C $wikisimple_folder #WikiSimple 
 #onmt_build_vocab -config config/model_3_emea.yaml -overwrite True #build vocab
 
 #Train Models
-#onmt_train -config config/model_1.yaml #-src_vocab $emea_folder/run/.vocab.src -tgt_vocab $emea_folder/run/.vocab.tgt #Train Emea model
+#onmt_train -config config/model_nl-en_emea.yaml #-src_vocab $emea_folder/run/.vocab.src -tgt_vocab $emea_folder/run/.vocab.tgt #Train Emea model
 #onmt_train -config config/model_en_c-s.yaml #-src_vocab $wikisimple_folder/run/.vocab.src -tgt_vocab $wikisimple_folder/run/.vocab.tgt #Train WikiSimple model
 #onmt_train -config config/model_3_emea.yaml #-src_vocab NMT-Data/Model_English_S_Dutch_S/run/.vocab.src -tgt_vocab NMT-Data/Model_English_S_Dutch_S/run/.vocab.tgt #train OpenSubtitles Model
 
