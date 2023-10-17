@@ -12,3 +12,6 @@ __pycache__/
 
 # other
 .idea/*
+
+# repo-specific
+NMT-Data/*
