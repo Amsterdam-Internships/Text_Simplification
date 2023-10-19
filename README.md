@@ -71,10 +71,8 @@ To run the municipal pipeline, the scripts expect evaluation data to be uploaded
 * Original sentences to `NMT-Data/Eval_Municipal/complex`
 * Simplified sentences to `NMT-Data/Eval_Municipal/simple`
 
-The municipal evaluation data is available on request for research purposes.
-
-[//]: # (Please contact [Iva Gornishka]&#40;i.gornishka@amsterdam.nl&#41;.)
-[//]: # (TODO: Uncomment after anonimity period.)
+The municipal evaluation data and further details about it can be found in
+[this repository](https://github.com/Amsterdam-AI-Team/dutch-municipal-text-simplification/tree/master/complex-simple-sentences).
 
 ### In-domain data extraction
 In many of our experiments we use in-domain data, extracted from the Opensubtitles corpus on the basis of similarity to a reference corpus.
@@ -93,13 +91,11 @@ For full documentaion, `python scripts/extract_sentences.py --help`
 ---
 ## Acknowledgements
 
-[//]: # (This repository was created in collaboration with [Amsterdam Intelligence]&#40;https://amsterdamintelligence.com/&#41; )
-[//]: # (for the [City of Amsterdam]&#40;https://www.amsterdam.nl/innovation/&#41;.)
+This repository was created in collaboration with [Amsterdam Intelligence](https://amsterdamintelligence.com/) 
+for the [City of Amsterdam](https://www.amsterdam.nl/innovation/).
 
-[//]: # (We thank the [Communications Department of the City of Amsterdam]&#40;https://www.amsterdam.nl/bestuur-organisatie/organisatie/bedrijfsvoering/directie-communicatie/&#41; )
-[//]: # (for providing us with a set of simplified documents which has been used for the creation of the municipal evaluation dataset.)
-
-[//]: # (TODO: Uncomment after anonimity period)
+We thank the [Communications Department of the City of Amsterdam](https://www.amsterdam.nl/bestuur-organisatie/organisatie/bedrijfsvoering/directie-communicatie/) 
+for providing us with a set of simplified documents which has been used for the creation of the municipal evaluation dataset.
 
 We thank [Marloes Evers](https://www.linkedin.com/in/marloes-evers-36675b134/) for providing us with the medical evaluation dataset.
 
