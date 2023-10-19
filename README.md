@@ -79,13 +79,13 @@ In many of our experiments we use in-domain data, extracted from the Opensubtitl
 To generate these in-domain data use the following script.
 
 ```commandline
-    python scripts/extract_sentences.py
+    python src/extract_sentences.py
 ```
 
 If you wish to create your own in-domain subset you can substitute the reference_file,
 the output paths for the Dutch and English parts of the extracted subset,
 as well as tweak other arguments such as encoding_method and num_samples.
-For full documentaion, `python scripts/extract_sentences.py --help`
+For full documentaion, `python src/extract_sentences.py --help`
 
 
 ---
