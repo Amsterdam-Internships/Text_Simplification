@@ -8,9 +8,9 @@ The full pipeline consists of the 3 models:
 
 On top of training the models, the repo contains code for evaluating the pipeline's quality using a number of automatic evaluation metrics (BLEU,SARI,METEOR).
 
-[//]: # (![]&#40;./media/pivot_pipeline_TS.png&#41;)
+[//]: # (![]&#40;./media/pipeline.png&#41;)
 <div align="center">
-   <img src="./media/pivot_pipeline_TS.png" width="600"/>
+   <img src="./media/pipeline.png" width="600"/>
    <br>
    <em>Figure 1. Pivot pipeline for text simplification</em>
 </div>
@@ -29,6 +29,8 @@ a python script for the [gpt-based experiment](./scripts/chatgpt.py).
 preprocessing and filtering scripts, tokenization,
 extraction of domain-specific subsets of the translation corpora, etc.
 1) [`config`](./config): Folder containing configuration files for the training of the models
+1) [`examples`](./examples): Folder containing examples of translations and simplifications
+of sentences for the different pipelines, as well as the manual numerical preservation reviews.
 1) [`NMT-Data`](./NMT-Data): Folder where all data will be downloaded and models will be saved
 1) [`media`](./media): Folder containing media files for demo purposes
 
